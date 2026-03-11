@@ -16,6 +16,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
@@ -33,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -113,6 +117,65 @@ fun homeScreen(modifier: Modifier = Modifier) {
                     }
                 }
             }
+        }
+        
+        Spacer(modifier = Modifier.height(32.dp))
+        
+        Text(
+            text = "Ultimas noticias",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        val sampleNews = listOf(
+            NewsItem("El presidente de EE.UU. no muestra signos de arrepentimiento...", "febrero 08 - 2024"),
+            NewsItem("Bañarse en la piscina de Cleopatra en el desierto...", "febrero 10 - 2024"),
+            NewsItem("Gigantes tecnológicos lanzan nueva IA...", "febrero 12 - 2024")
+        )
+        
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(sampleNews) { news ->
+                NewsCard(news = news)
+            }
+        }
+    }
+}
+
+data class NewsItem(val title: String, val date: String)
+
+@Composable
+fun NewsCard(news: NewsItem) {
+    Box(
+        modifier = Modifier
+            .size(width = 280.dp, height = 190.dp)
+            .background(Color(0xFF6246EA), shape = RoundedCornerShape(20.dp))
+            .padding(16.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = news.title,
+                color = Color.White,
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold,
+                maxLines = 5,
+                lineHeight = 28.sp,
+                overflow = TextOverflow.Ellipsis
+            )
+            
+            Text(
+                text = news.date,
+                color = Color.White,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }
