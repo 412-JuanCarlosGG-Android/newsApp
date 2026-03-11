@@ -154,7 +154,7 @@ fun NewsCard(news: NewsItem) {
         modifier = Modifier
             .size(width = 280.dp, height = 190.dp)
             .background(Color(0xFF6246EA), shape = RoundedCornerShape(20.dp))
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 32.dp, bottom = 16.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
